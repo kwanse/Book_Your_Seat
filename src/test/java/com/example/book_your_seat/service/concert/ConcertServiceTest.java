@@ -101,7 +101,8 @@ class ConcertServiceTest extends IntegralTestSupport {
 
         // when
 
-        List<ConcertListResponse> responses = concertQueryService.findAllConcertList().getConcertList();
+        int pageNumber = 0;
+        List<ConcertListResponse> responses = concertQueryService.findAllConcertList(pageNumber);
 
         // then
         Assertions.assertThat(responses)

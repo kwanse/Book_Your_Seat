@@ -28,12 +28,8 @@ public class ConcertQueryService {
     }
 
     @Cacheable(cacheNames = "concerts", key = "'allConcerts'")
-    public ResultRedisConcert findAllConcertList() {
-        List<ConcertListResponse> list = concertRepository.findAll()
-                .stream().map(ConcertListResponse::new)
-                .toList();
-
-        return new ResultRedisConcert(list);
+    public List<ConcertListResponse> findAllConcertList(int pageNumber) {
+        return concertRepository.findAllConcerts(pageNumber);
     }
 
     public Concert findByConcertId(final Long id){

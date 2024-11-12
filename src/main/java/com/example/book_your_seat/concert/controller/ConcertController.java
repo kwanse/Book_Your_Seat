@@ -1,5 +1,6 @@
 package com.example.book_your_seat.concert.controller;
 
+import com.example.book_your_seat.concert.controller.dto.ConcertListResponse;
 import com.example.book_your_seat.concert.controller.dto.ConcertResponse;
 import com.example.book_your_seat.concert.controller.dto.ResultRedisConcert;
 import com.example.book_your_seat.concert.service.query.ConcertQueryService;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/concerts")
@@ -32,9 +35,11 @@ public class ConcertController {
             summary = "모든 콘서트를 조회합니다.",
             description = "존재 하는 모든 콘서트를 조회합니다."
     )
-    @GetMapping
-    public ResponseEntity<ResultRedisConcert> findAllConcertList(){
-        ResultRedisConcert resultRedisConcert = concertQueryService.findAllConcertList();
-        return ResponseEntity.ok(resultRedisConcert);
+    @GetMapping("/{pageNumber}")
+    public ResponseEntity<List<ConcertListResponse>> findAllConcertList(
+            @PathVariable("pageNumber") int pageNumber
+    ){
+        List<ConcertListResponse> responses = concertQueryService.findAllConcertList(pageNumber);
+        return ResponseEntity.ok(responses);
     }
 }
