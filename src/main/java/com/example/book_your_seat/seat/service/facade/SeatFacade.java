@@ -32,9 +32,9 @@ public class SeatFacade {
     public SeatResponse selectSeat(final SelectSeatRequest request, final Long userId) {
         checkInProcessingQueue(request.concertId(), request.queueToken());
 
-        List<Seat> seats = seatCommandService.selectSeat(request);
-        redisService.cacheSeatIds(seats, userId);
-        return SeatResponse.from(seats);
+        SeatResponse response = seatCommandService.selectSeat(request);
+        redisService.cacheSeatIds(response, userId);
+        return response;
     }
 
     private void checkInProcessingQueue(Long concertId, String queueToken) {

@@ -35,4 +35,11 @@ public interface SeatRepository extends JpaRepository<Seat, SeatId>, SeatJdbcRep
 
     @Query("SELECT s FROM Seat s WHERE s.id.concertId = :concertId AND s.id.seatNumber IN :seatNumbers")
     List<Seat> findAllBySeatId(@Param("concertId") Long concertId, @Param("seatNumbers") List<Long> seatNumbers);
+
+    @Modifying
+    @Query("UPDATE Seat s SET s.isSold = true " +
+            "WHERE s.id.concertId = :concertId " +
+            "AND s.id.seatNumber IN :seatNumbers " +
+            "AND s.isSold = false")
+    int reserveSeat(@Param("concertId") Long concertId, @Param("seatNumbers") List<Long> seatNumbers);
 }

@@ -12,7 +12,7 @@ public final class SeatResponse {
     private final Long concertId;
     private final List<Long> seatNumbers;
 
-    private SeatResponse(Long concertId, List<Long> seatNumbers) {
+    public SeatResponse(Long concertId, List<Long> seatNumbers) {
         this.concertId = concertId;
         this.seatNumbers = seatNumbers;
     }

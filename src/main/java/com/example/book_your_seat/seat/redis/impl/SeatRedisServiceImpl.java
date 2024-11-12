@@ -2,6 +2,7 @@ package com.example.book_your_seat.seat.redis.impl;
 
 
 import com.example.book_your_seat.reservation.contorller.dto.request.PaymentRequest;
+import com.example.book_your_seat.seat.controller.dto.SeatResponse;
 import com.example.book_your_seat.seat.domain.Seat;
 import com.example.book_your_seat.seat.domain.SeatId;
 import com.example.book_your_seat.seat.redis.SeatRedisService;
@@ -25,9 +26,11 @@ public class SeatRedisServiceImpl implements SeatRedisService {
 
     @Override
     @Transactional
-    public void cacheSeatIds(final List<Seat> seats,final Long userId) {
-        seats.forEach(seat -> {
-            String redisKey = createRedisKey(seat);
+    public void cacheSeatIds(final SeatResponse response, final Long userId) {
+        List<Long> seatNumbers = response.getSeatNumbers();
+
+        seatNumbers.forEach(number -> {
+            String redisKey = "seat:" + response.getConcertId() + "-" + number;
             try {
                 redisTemplate.opsForValue().set(redisKey, userId.toString(), 30, TimeUnit.MINUTES);
             }catch (Exception e){
@@ -36,10 +39,6 @@ public class SeatRedisServiceImpl implements SeatRedisService {
         });
     }
 
-    @NotNull
-    private String createRedisKey(Seat seat) {
-        return  "seat:" + seat.getId().getConcertId() + "-" + seat.getId().getSeatNumber();
-    }
 
     @Override
     @Transactional(readOnly = true)
