@@ -35,7 +35,7 @@ public class ConcertController {
             summary = "모든 콘서트를 조회합니다.",
             description = "존재 하는 모든 콘서트를 조회합니다."
     )
-    @GetMapping("/{pageNumber}")
+    @GetMapping("/list/{pageNumber}")
     public ResponseEntity<List<ConcertListResponse>> findAllConcertList(
             @PathVariable("pageNumber") int pageNumber
     ){

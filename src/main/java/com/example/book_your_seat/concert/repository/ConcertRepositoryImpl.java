@@ -35,6 +35,7 @@ public class ConcertRepositoryImpl implements ConcertRepositoryCustom {
             return new ArrayList<>();
         }
 
+
         return queryFactory
                 .select(concertListProjection())
                 .from(concert)

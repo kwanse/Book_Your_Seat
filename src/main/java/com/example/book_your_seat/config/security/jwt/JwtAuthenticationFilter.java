@@ -26,6 +26,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String authorization = request.getHeader("Authorization");
 
+        String path = request.getRequestURI();
+        // /test/** 경로는 JWT 인증을 건너뜁니다
+        if (path.startsWith("/api/") || path.startsWith("/admin/")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         //token 이 없으면 anonymous User
         if (authorization == null) {
             filterChain.doFilter(request, response);

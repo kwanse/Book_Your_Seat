@@ -54,15 +54,16 @@ public class SecurityConfig {
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers(HttpMethod.GET, "/swagger-ui/**", "/api-docs/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers("/api/v1/users","/api/v1/users/login","/api/v1/users/email/**").permitAll()
-                        .requestMatchers("/admin/**").hasAnyAuthority(UserRole.ADMIN.getName())
+                        .requestMatchers("/api/**").permitAll()
+                        .requestMatchers("/admin/**").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling((exceptions) -> exceptions
                         .authenticationEntryPoint(new CustomAuthenticationEntryPoint()) // 인증 예외 처리
                         .accessDeniedHandler(new CustomAccessDeniedHandler())           // 인가 예외 처리
                 );
 
-        http
-                .addFilterBefore(new JwtAuthenticationFilter(securityJwtUtil), UsernamePasswordAuthenticationFilter.class);
+//        http
+//                .addFilterBefore(new JwtAuthenticationFilter(securityJwtUtil), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

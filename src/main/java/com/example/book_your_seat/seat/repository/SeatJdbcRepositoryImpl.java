@@ -1,6 +1,7 @@
 package com.example.book_your_seat.seat.repository;
 
 import com.example.book_your_seat.seat.domain.Seat;
+import com.kwanse.bulky.BulkyTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -13,9 +14,11 @@ import java.util.List;
 public class SeatJdbcRepositoryImpl implements SeatJdbcRepository {
 
     private final JdbcTemplate jdbcTemplate;
+    private final BulkyTemplate bulkyTemplate;
 
     @Override
     public void insertBulkSeats(List<Seat> seats) {
+
         String sql = "INSERT INTO seat (concert_id, seat_number, zone, is_sold) " +
                 "VALUES (?, ?, ?, ?)";
 

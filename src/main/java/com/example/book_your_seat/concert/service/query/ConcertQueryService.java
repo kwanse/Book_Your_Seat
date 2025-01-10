@@ -27,7 +27,7 @@ public class ConcertQueryService {
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_CONCERT_ID + id));
     }
 
-    @Cacheable(cacheNames = "concerts", key = "'allConcerts'")
+//    @Cacheable(cacheNames = "concerts", key = "'allConcerts'")
     public List<ConcertListResponse> findAllConcertList(int pageNumber) {
         return concertRepository.findAllConcerts(pageNumber);
     }

@@ -11,7 +11,7 @@ public final class ConcertConst {
     public static final String INVALID_CONCERT_START_HOUR = "공연 시작 시간은 0시에서 24시 사이만 가능합니다!";
     public static final String INVALID_CONCERT_ID = "일치하는 공연이 없습니다! Id: ";
 
-    public static final Integer TOTAL_STOCK = 100;
+    public static final Integer TOTAL_STOCK = 1000;
     public static final Integer RESERVATION_START_HOUR = 12;
     public static final Integer RESERVATION_START_MINUTE = 0;
     public static final Integer RESERVATION_START_SECOND = 0;

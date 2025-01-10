@@ -34,7 +34,7 @@ public class ConcertCommandService {
                 .mapToObj(i -> new SeatId(concert.getId(), (long) i))
                 .map(Seat::new)
                 .toList();
-        seatRepository.saveAll(seats);
+        seatRepository.insertBulkSeats(seats);
 
         return concert.getId();
     }
