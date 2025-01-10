@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.*;
 import java.util.List;
 import java.util.Optional;
 
-public interface SeatRepository extends JpaRepository<Seat, SeatId>, SeatJdbcRepository{
+public interface SeatRepository extends JpaRepository<Seat, SeatId>, SeatBulkyRepository{
 
     @Query(value = "SELECT * FROM Seat WHERE concert_id = :concertId", nativeQuery = true)
     List<Seat> findByConcertId(Long concertId);

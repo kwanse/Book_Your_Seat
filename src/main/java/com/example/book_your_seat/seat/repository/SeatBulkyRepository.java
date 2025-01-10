@@ -4,7 +4,7 @@ import com.example.book_your_seat.seat.domain.Seat;
 
 import java.util.List;
 
-public interface SeatJdbcRepository {
+public interface SeatBulkyRepository {
 
     void insertBulkSeats(List<Seat> seats);
 }
